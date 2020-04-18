@@ -218,3 +218,65 @@ def big_shoe_rebounds
     
   end
 end
+
+def most_points_scored
+  highest_score = 0
+  player = nil
+  game_hash.map do |keu, value|
+    counter = 0
+    while counter < value[:players].length
+      if value[:players][counter][:points] >= highest_score
+        highest_score = value[:players][counter][:points]
+        player = value[:players][counter][:player_name]
+      end
+      counter += 1
+    end
+  end
+  p player
+end
+
+def winning_team
+  home_team = 0
+  away_team = 0
+  game_hash.collect do |key, value|
+    if key == :home
+      total = 0
+      counter = 0
+      while counter < value[:players].length
+        total += value[:players][counter][:points]
+        counter += 1
+      end
+      home_team = total
+    end
+    if key == :away
+      total = 0
+      counter = 0
+      while counter < value[:players].length
+        total += value[:players][counter][:points]
+        counter += 1
+      end
+      away_team = total
+    end
+  end
+  if home_team > away_team
+    puts "#{game_hash[:home][:team_name]} wins!"
+  elsif away_team > home_team
+    puts "#{game_hash[:away][:team_name]} wins!"
+  else
+    puts "Tie!"
+  end
+end
+
+def player_with_longest_name
+  name = ""
+  game_hash.map do |key, value|
+    counter = 0
+    while counter < value[:players].length
+      if value[:players][counter][:player_name].length > name.length
+        name = value[:players][counter][:player_name]
+      end
+      counter += 1
+    end
+  end
+  puts name
+end

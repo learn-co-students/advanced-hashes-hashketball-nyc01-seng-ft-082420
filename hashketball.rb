@@ -1,3 +1,4 @@
+
 # Write your code below game_hash
 def game_hash
   {
@@ -125,5 +126,95 @@ def game_hash
     }
   }
 end
+require 'pry'
+def num_points_scored(player)
+  game_hash.map do |key, value|
+    counter = 0
+    while counter < value[:players].length do
+      if value[:players][counter][:player_name] == player
+        return value[:players][counter][:points]
+      end
+      counter += 1
+    end
+  end
+end
 
-# Write code here
+def shoe_size(player)
+  game_hash.map do |key, value|
+    counter = 0
+    while counter < value[:players].length do
+      if value[:players][counter][:player_name] == player
+        return value[:players][counter][:shoe]
+      end
+      counter += 1
+    end
+  end
+end
+
+def team_colors(team)
+  game_hash.map do |key, value|
+    if value[:team_name] == team
+      return value[:colors]
+    end
+  end
+end
+
+def team_names
+  array_of_teams = Array.new
+  game_hash.collect do |key, value|
+    array_of_teams << value[:team_name]
+  end
+  return array_of_teams
+end
+
+def player_numbers(team)
+  array_of_numbers = Array.new
+  game_hash.map do |key, value|
+    if value[:team_name] == team
+      counter = 0
+      while counter < value[:players].length do
+        array_of_numbers << value[:players][counter][:number]
+         counter += 1
+      end
+    end
+  end
+  return array_of_numbers
+end
+
+def player_stats(player)
+  hash_of_stats = Hash.new
+  game_hash.map do |key, value|
+    counter = 0 
+    while counter < value[:players].length do
+      if value[:players][counter][:player_name] == player
+        hash_of_stats = value[:players][counter]
+      end
+      counter += 1
+    end
+  end
+  return hash_of_stats
+end
+
+def big_shoe_rebounds
+  biggest_shoe = 0
+  player = nil
+  game_hash.map do |key, value|
+    counter = 0
+    while counter < value[:players].length do
+      if value[:players][counter][:shoe] >= biggest_shoe
+        biggest_shoe = value[:players][counter][:shoe]
+        player = value[:players][counter][:player_name]
+      end
+      counter += 1
+    end
+    
+    counter = 0
+    while counter < value[:players].length do
+      if value[:players][counter][:player_name] == player
+        return value[:players][counter][:rebounds]
+      end
+      counter += 1
+    end
+    
+  end
+end

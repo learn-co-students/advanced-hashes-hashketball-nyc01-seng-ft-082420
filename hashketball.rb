@@ -268,15 +268,37 @@ def winning_team
 end
 
 def player_with_longest_name
-  name = ""
+  longest_name = ""
   game_hash.map do |key, value|
     counter = 0
     while counter < value[:players].length
-      if value[:players][counter][:player_name].length > name.length
-        name = value[:players][counter][:player_name]
+      if value[:players][counter][:player_name].length > longest_name.length
+        longest_name = value[:players][counter][:player_name]
       end
       counter += 1
     end
   end
-  puts name
+  return longest_name
+end
+
+def long_name_steals_a_ton?
+  most_steals = 0
+  game_hash.map do |key, value|
+    counter = 0
+    while counter < value[:players].length
+      if value[:players][counter][:steals] >= most_steals
+        most_steals = value[:players][counter][:steals]
+      end
+      counter += 1
+    end
+    counter = 0
+    while counter < value[:players].length do
+      # binding.pry
+      if value[:players][counter][:player_name] == player_with_longest_name
+        # binding.pry
+        puts value[:players][counter][:steals] == most_steals
+      end
+      counter += 1
+    end
+  end
 end

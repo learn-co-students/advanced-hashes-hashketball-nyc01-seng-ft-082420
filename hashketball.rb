@@ -126,7 +126,7 @@ def game_hash
     }
   }
 end
-require 'pry'
+
 def num_points_scored(player)
   game_hash.map do |key, value|
     counter = 0
@@ -293,9 +293,7 @@ def long_name_steals_a_ton?
     end
     counter = 0
     while counter < value[:players].length do
-      # binding.pry
       if value[:players][counter][:player_name] == player_with_longest_name
-        # binding.pry
         puts value[:players][counter][:steals] == most_steals
       end
       counter += 1

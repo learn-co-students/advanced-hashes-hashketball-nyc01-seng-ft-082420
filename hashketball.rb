@@ -1,4 +1,6 @@
-# Write your code below game_hash
+require 'pry'
+
+
 def game_hash
   {
     home: {
@@ -126,4 +128,142 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player_name)
+  
+  game_hash.each do |location, team_data|
+
+    team_data.each do |attribute, data|
+      
+      team_data[:players].each do |player|
+        
+        if player[:player_name] == player_name
+          return player[:points]
+        end
+        
+      end
+      
+    end
+    
+  end
+  
+end
+
+def shoe_size(player_name)
+  
+  game_hash.each do |location, team_data|
+
+    team_data.each do |attribute, data|
+      
+      team_data[:players].each do |player|
+        
+        if player[:player_name] == player_name
+          return player[:shoe]
+        end
+        
+      end
+      
+    end
+    
+  end
+  
+end
+
+def team_colors(team_name)
+  
+  game_hash.each do |location, team_data|
+
+    team_data.each do |attribute, data|
+      
+      if data == team_name
+        return team_data[:colors]
+      end
+    # binding.pry
+      
+    end
+    
+  end
+  
+end
+
+def team_names
+  teams = []
+  
+  game_hash.each do |location, team_data|
+    
+    team_data.each do |attribute, data|
+      
+      if attribute == :team_name
+        teams.push(data)
+      end
+      
+    end
+    
+  end
+  teams
+end
+
+def player_numbers(team)
+  numbers = []
+  
+  game_hash.each do |location, team_data|
+
+    team_data.each do |attribute, data|
+      
+      team_data[:players].each do |player|
+        
+        if data == team
+          numbers.push player[:number]
+        end
+        
+      end
+      
+    end
+    
+  end
+  
+  numbers.sort()
+end
+
+def player_stats(player_name)
+  
+  game_hash.each do |location, team_data|
+
+    team_data.each do |attribute, data|
+      
+      team_data[:players].each do |player|
+        
+        if player[:player_name] == player_name
+          return player
+        end
+        
+      end
+      
+    end
+    
+  end
+  
+end
+
+def big_shoe_rebounds
+  max = nil
+  rebounds = nil
+  
+  game_hash.each do |location, team_data|
+
+    team_data.each do |attribute, data|
+      
+      team_data[:players].each do |player|
+        
+          if max == nil || max < player[:shoe]
+            max = player[:shoe]
+            rebounds = player[:rebounds]
+          end
+        
+      end
+      
+    end
+    
+  end
+  
+  rebounds
+end

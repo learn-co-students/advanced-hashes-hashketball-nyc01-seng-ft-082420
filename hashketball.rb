@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require "pry"
+
 def game_hash
   {
     home: {
@@ -127,3 +129,88 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(asked_player)
+  game_hash.each do |home_away, team|
+    team.each do |team_attr, attr_values|
+      next unless team_attr == :players
+
+      attr_values.each do |player|
+        return player[:points] if player[:player_name] == asked_player
+      end
+    end
+  end
+end
+
+def shoe_size(asked_player)
+  game_hash.each do |home_away, team|
+    team.each do |team_attr, attr_values|
+      next unless team_attr == :players
+
+      attr_values.each do |player|
+        return player[:shoe] if player[:player_name] == asked_player
+      end
+    end
+  end
+end
+
+def team_colors(asked_team)
+  game_hash.each do |home_away, team|
+    return game_hash[home_away][:colors] if team[:team_name] == asked_team
+  end
+end
+
+def team_names
+  game_hash.collect do |home_away, team|
+    team[:team_name]
+  end
+end
+
+def player_numbers(asked_team)
+  number_array = []
+  game_hash.each do |home_away, team|
+    next unless team[:team_name] == asked_team
+
+    team.each do |team_attr, attr_values|
+      next unless team_attr == :players
+
+      attr_values.each do |attr_values|
+        number_array << attr_values[:number]
+      end
+    end
+  end
+  number_array
+end
+
+def player_stats(asked_player)
+  stat_hash = {}
+  game_hash.collect do |home_away, team|
+    team.each do |team_attr, attr_values|
+      next unless team_attr == :players
+      attr_values.each do |player|
+        if player[:player_name] == asked_player
+          stat_hash = player
+        end
+      end
+    end
+  end
+  stat_hash
+end
+
+def big_shoe_rebounds
+  #
+  biggest_shoe = 0
+  num_rebounds = 0
+  game_hash.each do |home_away, team|
+    team.each do |team_attr, attr_values|
+      next unless team_attr == :players
+      attr_values.each do |player|
+        if player[:shoe] > biggest_shoe
+          biggest_shoe = player[:shoe]
+          num_rebounds = player[:rebounds]
+
+        end
+      end
+    end
+  end
+  num_rebounds
+end

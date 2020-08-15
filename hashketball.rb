@@ -1,3 +1,5 @@
+require 'pry'
+
 # Write your code below game_hash
 def game_hash
   {
@@ -127,3 +129,92 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player_name)
+  player_pts = 0
+  game_hash.each do |team_loc, team_atts|
+    team_atts[:players].each do |player_stats|
+      # binding.pry
+      if player_stats[:player_name] == player_name
+        # binding.pry
+        player_pts = player_stats[:points]
+        # binding.pry
+      end
+    end
+  end
+  player_pts
+end
+
+def shoe_size(player_name)
+  player_shoe_size = 0
+  game_hash.each do |team_loc, team_atts|
+    team_atts[:players].each do |player_stats|
+      if player_stats[:player_name] == player_name
+        player_shoe_size = player_stats[:shoe]
+        # binding.pry
+      end
+    end
+  end
+  player_shoe_size
+end
+
+def team_colors(team_name)
+  team_colors = ""
+  game_hash.each do |team_loc, team_atts|
+    # binding.pry
+    if team_atts[:team_name] == team_name
+      team_colors = team_atts[:colors].to_a
+    end
+  end
+  team_colors
+end
+
+def team_names
+# binding.pry
+  team_names = []
+  home_name = game_hash[:home][:team_name]
+  away_name = game_hash[:away][:team_name]
+  team_names += [home_name, away_name]
+  # binding.pry
+end
+
+def player_numbers(team_name)
+  player_numbers = []
+  game_hash.each do |team_loc, team_atts|
+    if team_name == team_atts[:team_name]
+      team_atts[:players].each do |player_stats|
+        # binding.pry
+          player_numbers << player_stats[:number]
+      end
+    end
+  end
+  player_numbers
+end
+
+def player_stats(player_name)
+  game_hash.each do |team_loc, team_atts|
+    team_atts[:players].each do |player_stats|
+      # binding.pry
+      if player_name == player_stats[:player_name]
+        return player_stats
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  max_shoe_size = 0
+  rebounds = 0
+  game_hash.each do |team_loc, team_atts|
+    team_atts[:players].each do |player_stats|
+      # binding.pry
+     if player_stats[:shoe] > max_shoe_size
+       max_shoe_size = player_stats[:shoe]
+       rebounds = player_stats[:rebounds]
+      # binding.pry
+      end
+    end
+  end
+  rebounds
+end
+

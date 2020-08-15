@@ -187,5 +187,4 @@ describe 'hashketball' do
     end
 
   end
-
 end

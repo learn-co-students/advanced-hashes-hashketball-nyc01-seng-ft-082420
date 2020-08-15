@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -126,4 +127,64 @@ def game_hash
   }
 end
 
-# Write code here
+  def num_points_scored(player_n)
+    game_hash.each do |teams, array|
+      array[:players].each do |player|
+        return player[:points] if player[:player_name] == player_n
+      end
+    end
+  end
+
+def shoe_size(player_n)
+  game_hash.each do |home, list|
+    list [:players].each do |player|
+      return player[:shoe] if player [:player_name] == player_n
+    end
+  end
+end
+
+
+def team_colors(team_name)
+  game_hash.each do |teams, array|
+    if array [:team_name] == team_name
+      return array[:colors].map(&:capitalize)
+    end
+  end
+end
+
+
+def team_names()
+  game_hash.map {|teams, array| array[:team_name]}
+end
+
+  def player_numbers(team_name)
+    game_hash.each do |teams, array|
+    if array [:team_name] == team_name
+        return array[:players].map {|player| player[:number]}
+      end
+    end
+  end
+
+def player_stats(player_n)
+  game_hash.each do |teams, array|
+    array[:players].each do |player|
+      return player if player[:player_name] == player_n
+    end
+  end
+end
+
+  #Mason shoe size 19
+def big_shoe_rebounds()
+  biggest = 0
+  rebounds = 0
+  game_hash.each do |teams, array|
+    array[:players].each do |player|
+      size = player[:shoe]
+      if size > biggest
+        biggest = size
+        rebounds = player[:rebounds]
+      end
+    end
+  end
+  rebounds
+end

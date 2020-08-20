@@ -1,3 +1,4 @@
+require "pry"
 # Write your code below game_hash
 def game_hash
   {
@@ -127,3 +128,102 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player_name)
+  game_hash.each do |location, team_data|
+    game_hash[location][:players].each_with_index do |player_data,idx|
+        if game_hash[location][:players][idx][:player_name] == player_name
+          return game_hash[location][:players][idx][:points]
+        end
+    end
+  end
+end
+
+def shoe_size(player_name)
+  game_hash.each do |location, team_data|
+    game_hash[location][:players].each_with_index do |player_data,idx|
+        if game_hash[location][:players][idx][:player_name] == player_name
+          return game_hash[location][:players][idx][:shoe]
+        end
+    end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |location, team_data|
+    if game_hash[location][:team_name] == team_name
+      return game_hash[location][:colors]
+    end
+  end
+end
+
+def team_names
+  team_names_array = game_hash.map do |location, team_data|
+    game_hash[location][:team_name]
+  end
+  team_names_array
+end
+
+def player_numbers(team_name)
+  jersey_array = []
+   game_hash.each do |location, team_data|
+     if game_hash[location][:team_name] == team_name
+       game_hash[location][:players].each_with_index do |player, idx|
+         jersey_array << game_hash[location][:players][idx][:number]
+       end
+     end
+   end
+   jersey_array
+ end
+         
+def player_stats(player_name)
+  game_hash.each do |location, team_data|
+    game_hash[location][:players].each_with_index do |player_data,idx|
+      if game_hash[location][:players][idx][:player_name] == player_name
+        return game_hash[location][:players][idx]
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  biggest_shoe = 0
+  rebounds = 0
+  game_hash.each do |location, team_data|
+    game_hash[location][:players].each_with_index do |player_data,idx|
+      if game_hash[location][:players][idx][:shoe] > biggest_shoe
+        biggest_shoe = game_hash[location][:players][idx][:shoe]
+        rebounds = game_hash[location][:players][idx][:rebounds]
+      end
+    end
+  end
+  rebounds
+end
+
+def most_points_scored
+  most_points = 0
+  name = ""
+   game_hash.each do |location, team_data|
+    game_hash[location][:players].each_with_index do |player_data,idx|
+      if game_hash[location][:players][idx][:points] > most_points
+        most_points = game_hash[location][:players][idx][:points]
+        name = game_hash[location][:players][idx][:player_name]
+      end
+    end
+  end
+  puts name
+  name
+end
+  
+def winning_team
+  team_name = ""
+  total_points = 0 
+  game_hash.each do |location, team_data|
+    game_hash[location][:players].each_with_index do |player_data,idx|
+      #How do you sum each teams points and compare?
+    end
+  end
+end
+
+    
+       

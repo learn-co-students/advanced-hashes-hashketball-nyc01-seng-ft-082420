@@ -127,3 +127,90 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(player_name)
+  points = []
+  game_hash.each do |home_away, data|
+    data[:players].each do |player|
+      if player[:player_name] == player_name
+      points << player[:points]
+      end
+    end
+  end
+  points.join.to_f
+end
+
+
+
+
+def shoe_size(player_name)
+  shoe_size = []
+  game_hash.each do |home_away, data|
+    data[:players].each do |player|
+      if player[:player_name] == player_name
+        shoe_size << player[:shoe]
+      end
+    end
+  end
+  shoe_size.join.to_f
+end
+
+def team_colors(team_name)
+  colors_array = []
+  game_hash.each do |home, data|
+  if data[:team_name] == team_name
+    colors_array.push(data[:colors])
+    end
+  end
+  colors_array.flatten
+end
+
+def team_names
+  teams = []
+  game_hash.each do |home_away, data|
+    teams << data[:team_name]
+  end
+  teams
+end
+
+def player_numbers(team_name)
+  player_jersey_numbers = []
+  game_hash.each do |home_away, data|
+    if data[:team_name] == team_name
+    data[:players].each do |player|
+      player_jersey_numbers << player[:number]
+    end
+  end
+end
+ player_jersey_numbers
+ end
+
+def player_stats(player_name)
+  player_stats = {}
+  game_hash.each do |home_away, data|
+    data.each do |team, players|
+      data[:players].each do |player|
+        if player[:player_name] == player_name
+        player_stats = player.each do |k,v|
+          k != :player_name
+        end
+        end
+      end
+    end
+  end
+  player_stats
+end
+
+
+def big_shoe_rebounds
+  rebounds = ""
+  game_hash.each do |home_away, data|
+    data.each do |team, players|
+      data[:players].each do |player|
+      if player[:shoe] == 19
+         rebounds = player[:rebounds]
+      end
+  end
+  end
+  end
+  rebounds.to_f
+end

@@ -1,10 +1,21 @@
+# Write your code here!
+
+
 # Write your code below game_hash
-def game_hash
+def 
+  
+  game_hash
   {
-    home: {
+
+
+    home: 
+    {
+
       team_name: "Brooklyn Nets",
-      colors: ["Black", "White"],
-      players: [
+      colors:  [ "Black", "White" ],
+      players: 
+      [
+
         {
           player_name: "Alan Anderson",
           number: 0,
@@ -60,12 +71,20 @@ def game_hash
           blocks: 11,
           slam_dunks: 1
         }
+
       ]
+
     },
-    away: {
+
+
+    away: 
+    {
+
       team_name: "Charlotte Hornets",
-      colors: ["Turquoise", "Purple"],
-      players: [
+      colors:  [ "Turquoise", "Purple" ],
+      players: 
+      [
+
         {
           player_name: "Jeff Adrien",
           number: 4,
@@ -121,9 +140,229 @@ def game_hash
           blocks: 5,
           slam_dunks: 12
         }
+
       ]
+
     }
+
+
   }
 end
 
+
+
+
+
+
+
+
 # Write code here
+
+def 
+  
+  num_points_scored(player_name)
+  puts
+  puts "Player Name::  { #{player_name} }"
+  puts
+  
+    points_scored = 0
+
+  game_hash.each do |team, stats_n_dats|
+  
+    stats_n_dats[:players].each do |stats|
+
+      if  stats[:player_name] == player_name
+          points_scored = stats[:points] end
+
+                                      end
+                 end
+
+  puts puts puts puts
+  points_scored
+
+
+end
+
+
+
+
+def 
+  
+  shoe_size(player_name)
+  puts
+  puts "Player Name::  { #{player_name} }"
+  puts
+
+    size = 0 
+
+  game_hash.each do |team, stats_n_dats|
+
+    stats_n_dats[:players].each do |stats|
+
+      if  stats[:player_name] == player_name 
+          size = stats[:shoe]                 end
+
+                 end
+                                     end
+
+  puts puts puts puts                                     
+  size
+
+
+end 
+
+
+
+
+def 
+  
+  team_colors(team_at)
+  puts
+  puts "Team::  { #{team_at} }"
+  puts
+
+    colors = []
+
+  game_hash.each do |team, stats_n_dats|
+
+    if  stats_n_dats[:team_name] == team_at
+        colors = stats_n_dats[:colors].each do |color|  end
+                                            end
+                 end
+
+  puts puts puts puts                 
+  colors
+
+
+end
+
+
+
+
+def 
+  
+  player_numbers(j_nums)
+  puts
+  puts "Numbers For::  { #{j_nums} }"
+  puts
+
+    jerseys = []
+  
+  game_hash.each do |team, stats_n_dats|
+
+    if stats_n_dats[:team_name] == j_nums
+
+       stats_n_dats.each do |key, value|
+
+        if key == :players
+
+           value.each do |player_name|
+
+          jerseys << player_name[:number]
+
+                      end
+        end
+
+                         end
+
+    end
+
+                 end
+
+  puts puts puts puts                 
+  return jerseys
+
+
+end
+
+
+
+
+def 
+  
+  player_stats(game_data)
+  puts
+  puts "STATS::  { #{game_data} }"
+  puts
+
+  game_hash.each do |team, stats_n_dats|
+
+    stats_n_dats.each do |key, value|
+
+      if key == :players
+
+        value.each do |player_name|
+
+          if game_data == player_name[:player_name]
+
+            return player_name
+
+          end
+                   end
+
+      end
+
+                      end
+
+                 end
+
+  puts puts puts puts
+
+
+end
+
+
+
+
+
+
+
+def 
+  
+  team_names
+  
+    teams = []
+
+  game_hash.each do |team, stats_n_dats|
+
+    stats_n_dats.each do |details, info|
+
+      if  details == :team_name
+          teams << info     end
+
+                      end
+                 end
+
+  puts puts puts puts                 
+  teams
+
+
+end
+
+
+
+
+def 
+  
+  big_shoe_rebounds
+
+    rebounds = 0 
+    big_shoe = 0 
+  
+  game_hash.each do |team, stats_n_dats|
+
+    stats_n_dats[:players].each do |player_name|
+
+      if  player_name[:shoe] > big_shoe
+          big_shoe = player_name[:shoe]
+          rebounds = player_name[:rebounds]  end
+
+                                     end
+                 end
+
+  puts puts puts puts                 
+  return rebounds
+
+
+end
+

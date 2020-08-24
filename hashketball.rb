@@ -128,28 +128,28 @@ def game_hash
   }
 end
 
-def num_points_scored(name)
-    game_hash.each do |team, info|
-      info[:players].each do |player|
-        if player[:player_name] == name
-          return player[:points]
-        end
+def num_points_scored(player)
+  game_hash.each do |key, value|
+    value[:players].each do |name|
+      if name[:player_name] == player
+        return name[:points]
+      end
     end
   end
 end
 
 def shoe_size(name)
-   game_hash.each do |team, info|
-      info[:players].each do |player|
-        if player[:player_name] == name
-          return player[:shoe]
-        end
+  game_hash.each do |key, value|
+    value[:players].each do |player|
+      if player[:player_name] == name
+        return player[:shoe]
+      end
     end
   end
 end
 
 def team_colors(team)
-  game_hash.each do |home_away, team_and_color|
+ game_hash.each do |home_away, team_and_color|
     team_and_color.each do |team_name|
       if team_and_color[:team_name] == team
         return team_and_color[:colors]
@@ -179,7 +179,7 @@ def player_numbers(team_name)
   end
     return numbers_of_jersey
 end
-  
+
 def player_stats(player_name)
   game_hash.each do |team, info|
     info[:players].each do |player|
@@ -198,7 +198,6 @@ def big_shoe_rebounds
       if player[:shoe] > shoe_size
          shoe_size = player[:shoe]  
          rebounds = player[:rebounds] 
-         #binding.pry
       end
     end
   end

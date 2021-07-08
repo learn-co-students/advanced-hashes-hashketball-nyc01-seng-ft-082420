@@ -1,4 +1,5 @@
-# Write your code below game_hash
+require "pry"
+
 def game_hash
   {
     home: {
@@ -126,4 +127,126 @@ def game_hash
   }
 end
 
-# Write code here
+def get_all_player_names #=> get all players names from both teams
+  all_player_names = []
+  game_hash.each do |location, team_data| #=> location = home or away, team_data = team hash
+    team_data[:players].count.times do |index| #=> loop over players
+      all_player_names.push(team_data[:players][index][:player_name])
+    end
+  end
+  all_player_names
+end
+
+def get_team_players_names(team) #=> get only play names from one team
+  team_players_names = []
+  game_hash[team][:players].count.times do |index|
+    current_player = game_hash[team][:players][index][:player_name]
+    team_players_names.push(current_player)
+  end
+  team_players_names
+end
+
+def player_stats(player_name) #=> get one players full stats
+  game_hash.each do |location, team_data| #=> location = home or away, team_data = team hash
+    team_data[:players].count.times do |index| #=> loop over players
+      current_player = team_data[:players][index][:player_name]
+      if current_player == player_name
+        return team_data[:players][index]
+      end
+    end
+  end
+end
+
+def get_player_stat(player_name, data_type)
+  player_stats(player_name)[data_type]
+end
+
+def get_player_with_biggest_stat(stat)
+  biggest_stat = nil
+  player_with_biggest_stat = nil
+  all_player_names = get_all_player_names
+  all_player_names.count.times do |index|
+    current_stat = get_player_stat(all_player_names[index], stat)
+    if !biggest_stat || current_stat > biggest_stat
+      biggest_stat = current_stat
+      player_with_biggest_stat = all_player_names[index]
+    end
+  end
+  player_with_biggest_stat
+end
+
+def num_points_scored(player_name)
+  get_player_stat(player_name, :points)
+end
+
+def shoe_size(player_name)
+  get_player_stat(player_name, :shoe)
+end
+
+def team_colors(team_name)
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team_name
+      return team_data[:colors]
+    end
+  end
+end
+
+def team_names
+  [game_hash[:home][:team_name], game_hash[:away][:team_name]]
+end
+
+def player_numbers(team_name)
+  team_player_numbers = []
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team_name
+      team_data[:players].count.times do |index|
+        team_player_numbers.push(team_data[:players][index][:number])
+      end
+    end
+  end
+  team_player_numbers
+end
+
+def big_shoe_rebounds
+  get_player_stat(get_player_with_biggest_stat(:shoe), :rebounds)
+end
+
+def most_points_scored
+  get_player_with biggest_stat(:points)
+end
+
+def get_team_score(team)
+  score = 0
+  team_players_names = get_team_players_names(team)
+  team_players_names.count.times do |index|
+    current_player = team_players_names[index]
+    score += get_player_stat(current_player, :points)
+  end
+  score
+end
+
+def winning_team
+  home_score = get_team_score(:home)
+  away_score = get_team_score(:away)
+  home_team_wins = home_score > away_score
+  home_team_wins ? "Home Team Wins! #{home_score} to #{away_score}" : "Away Team Wins! #{away_score} to #{home_score}"
+end
+
+def player_with_longest_name
+  longest_name = nil
+  all_player_names = get_all_player_names
+  all_player_names.count.times do |index|
+    current_player_name = all_player_names[index]
+    if !longest_name || current_player_name.length > longest_name.length
+      longest_name = current_player_name
+    end
+  end
+  longest_name
+end
+
+def long_name_steals_a_ton?
+  player_with_longest_name == get_player_with_biggest_stat(:steals) ? true : false
+end
+
+
+  
